@@ -9,11 +9,13 @@ const cors = require('cors');
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
+const apiRouter = require('./routes/api');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
+app.set('view engine', 'html');
 sequelize.sync({ force: false })
     .then(() => {
         console.log('데이터베이스 연결 성공');
@@ -44,6 +46,7 @@ app.use(cors({
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
+app.use('/api', apiRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

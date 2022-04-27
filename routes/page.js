@@ -2,6 +2,7 @@ const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { Domain } = require('../models');
 const { isLoggedIn } = require('./middleware');
+const User = require('../models/user');
 
 const router = express.Router();
 
@@ -21,6 +22,10 @@ router.get('/', (req, res, next) => {
         }
     ]);
 });
+
+router.get('/join', (req,res) => {
+    res.sendFile(__dirname + 'join.html');
+})
 
 router.post('/domain', isLoggedIn, async (req, res, next) => {
     try {
