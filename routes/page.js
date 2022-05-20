@@ -1,31 +1,18 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { Domain } = require('../models');
-const { isLoggedIn } = require('./middleware');
+const { isLoggedIn } = require('./middlewares');
 const User = require('../models/user');
 
 const router = express.Router();
 
-router.get('/profile', (req, res) => {
-    res.json({ title: '내 정보 - NodeBird' });
-});
+const json = [
+    {}
+];
 
 router.get('/', (req, res, next) => {
-    res.json([
-        {
-            id: 12312,
-            name: 'luke',
-        },
-        {
-            id: 83294,
-            name: 'sam',
-        }
-    ]);
+    res.json(json);
 });
-
-router.get('/join', (req,res) => {
-    res.sendFile(__dirname + 'join.html');
-})
 
 router.post('/domain', isLoggedIn, async (req, res, next) => {
     try {

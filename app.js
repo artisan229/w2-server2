@@ -10,11 +10,12 @@ dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
 const apiRouter = require('./routes/api');
+const v1Router = require('./routes/v1');
 const { sequelize } = require('./models');
-const passportConfig = require('./passport');
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 sequelize.sync({ force: false })
     .then(() => {
@@ -23,8 +24,6 @@ sequelize.sync({ force: false })
     .catch((err) => {
         console.error(err);
     })
-passportConfig();
-
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -39,14 +38,15 @@ app.use(session({
         secure: false,
     }
 }));
-
 app.use(cors({
+    origin: true,
     credentials: true,
 }))
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
+app.use('/v1', v1Router);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
