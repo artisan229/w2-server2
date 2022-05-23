@@ -3,10 +3,10 @@ const Sequelize = require('sequelize');
 module.exports = class Movie extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
-            id: {
+            code: {
                 type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
+                allowNull: false,
+                unique: true,
             },
             title: {
                 type: Sequelize.STRING(100),
