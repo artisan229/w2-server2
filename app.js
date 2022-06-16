@@ -54,7 +54,10 @@ if (process.env.NODE_ENV === 'production') {
 app.use(session(sessionOption));
 
 app.use(cors({
-    origin: true,
+    origin: [
+        'https://wiilywood.co.kr',
+        'https://www.willywood.co.kr'
+    ],
     credentials: true,
 }))
 
