@@ -5,6 +5,8 @@ const path = require('path');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const helmet = require('helmet');
+const hpp = require('hpp');
 
 dotenv.config();
 const pageRouter = require('./routes/page');
@@ -17,7 +19,7 @@ const app = express();
 app.set('port', process.env.PORT || 8001);
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
     .then(() => {
         console.log('데이터베이스 연결 성공');
     })
@@ -25,19 +27,32 @@ sequelize.sync({ force: false })
         console.error(err);
     })
 
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'production') {
+    app.enable('trust proxy');
+    app.use(morgan('combined'));
+    app.use(helmet({ contentSeurityPolicy: false }));
+    app.use(hpp());
+} else {
+    app.use(morgan('dev'));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(session({
+
+const sessionOption = {
     resave: false,
     saveUninitialized: false,
     secret: process.env.COOKIE_SECRET,
     cookie: {
         httpOnly: true,
         secure: false,
-    }
-}));
+    },
+};
+if (process.env.NODE_ENV === 'production') {
+    sessionOption.proxy = true;
+}
+app.use(session(sessionOption));
+
 app.use(cors({
     origin: true,
     credentials: true,
