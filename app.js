@@ -56,7 +56,8 @@ app.use(session(sessionOption));
 app.use(cors({
     origin: [
         'https://wiilywood.co.kr',
-        'https://www.willywood.co.kr'
+        'https://www.willywood.co.kr',
+        'http://localhost:3000'
     ],
     credentials: true,
 }))
