@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production PORT=80 pm2 start app.js",
+    "start": "cross-env NODE_ENV=production PORT=80 pm2 start server.js",
     "dev": "nodemon server"
   },
   "author": "",
@@ -20,6 +20,8 @@
     "ejs": "^3.1.7",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
+    "greenlock": "^4.0.4",
+    "greenlock-express": "^4.0.3",
     "helmet": "^5.1.0",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
