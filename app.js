@@ -53,12 +53,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 app.use(session(sessionOption));
 
-// app.use(cors({
-//     origin: ["https://willywood.co.kr",
-//         "https://www.willywood.co.kr",
-//         "http://localhost:3000"],
-//     credentials: true,
-// }))
+app.use(cors({
+    origin: ["https://willywood.co.kr",
+            "https://www.willywood.co.kr",
+            "http://localhost:3000"],
+    credentials: true,
+}))
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
