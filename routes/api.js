@@ -18,7 +18,7 @@ router.get("/user/:id", async (req, res, next) => {
     }
 })
 
-router.get("/movie", cors(), async (req, res, next) => {
+router.get("/movie", async (req, res, next) => {
     try {
         const movies = await Movie.findAll();
         res.send(movies);
