@@ -54,9 +54,11 @@ if (process.env.NODE_ENV === 'production') {
 app.use(session(sessionOption));
 
 app.use(cors({
-    origin: ["https://willywood.co.kr",
-            "https://www.willywood.co.kr",
-            "http://localhost:3000"],
+    origin: [
+        "https://willywood.co.kr",
+        "https://www.willywood.co.kr",
+        "http://localhost:3000"
+    ],
     credentials: true,
 }))
 
