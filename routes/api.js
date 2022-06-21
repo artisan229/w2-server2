@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 
 const User = require('../models/user');
 const Movie = require('../models/movie');
