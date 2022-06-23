@@ -5,17 +5,17 @@ const Movie = require('../models/movie');
 
 const router = express.Router();
 
-router.get("/user/:id", async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const user = await User.findOne({
-            where: { id: id }
-        });
-        res.send(user);
-    } catch (err) {
-        console.error(err);
-    }
-})
+// router.get("/user/:id", async (req, res, next) => {
+//     try {
+//         const { id } = req.params;
+//         const user = await User.findOne({
+//             where: { id: id }
+//         });
+//         res.send(user);
+//     } catch (err) {
+//         console.error(err);
+//     }
+// })
 
 router.get("/movie", async (req, res, next) => {
     try {
