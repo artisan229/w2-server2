@@ -16,14 +16,14 @@ module.exports = class Movie extends Sequelize.Model {
                 type: Sequelize.STRING(20),
                 allowNull: false,
             },
-            tag: {
+            category: {
                 type: Sequelize.STRING(20),
                 allowNull: false,
             },
             date: {
                 type: Sequelize.DATE,
             },
-            thumbnail: {
+            poster: {
                 type: Sequelize.STRING(500),
                 allowNull: false,
             },
@@ -31,6 +31,15 @@ module.exports = class Movie extends Sequelize.Model {
                 type: Sequelize.STRING(500),
                 allowNull: false,
             },
+            about: {
+                type: Sequelize.STRING(500),
+            },
+            tag: {
+                type: Sequelize.STRING(500),
+            },
+            running_time: {
+                type: Sequelize.INTEGER(),
+            }
         }, {
             sequelize,
             timestamps: false,
